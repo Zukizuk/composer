@@ -32,37 +32,39 @@ INSTALL_DIR="$HOME/clockit-agent"
 echo -e "${YELLOW}📁 Creating installation directory: $INSTALL_DIR${NC}"
 mkdir -p "$INSTALL_DIR"
 
-# Change to the installation directory
-echo -e "${YELLOW}📂 Changing to installation directory: $INSTALL_DIR${NC}"
-cd "$INSTALL_DIR" || { echo -e "${RED}❌ Failed to change to installation directory.${NC}"; exit 1; }
+# NOTE: We don't change directory since when run with curl | bash, 
+# directory changes don't persist to the user's shell
 
 # Download docker-compose.yml
 echo -e "${YELLOW}⬇️  Downloading docker-compose.yml...${NC}"
-curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/docker-compose.yml -o docker-compose.yml
+curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/docker-compose.yml -o "$INSTALL_DIR/docker-compose.yml"
 
 # Download sample .env if it doesn't exist
-if [ ! -f .env ]; then
+if [ ! -f "$INSTALL_DIR/.env" ]; then
     echo -e "${YELLOW}⬇️  Downloading sample .env file...${NC}"
-    curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/.env.example -o .env
+    curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/.env.example -o "$INSTALL_DIR/.env"
     echo -e "${YELLOW}⚠️  Please edit the .env file with your configuration before running.${NC}"
 fi
 
 # Download update script
 echo -e "${YELLOW}⬇️  Downloading update script...${NC}"
-curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/update.sh -o update.sh
-chmod +x update.sh
+curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/update.sh -o "$INSTALL_DIR/update.sh"
+chmod +x "$INSTALL_DIR/update.sh"
 echo -e "${GREEN}✅ Update script downloaded and made executable${NC}"
 
 echo -e "${GREEN}✅ Files downloaded successfully!${NC}"
 echo ""
 echo -e "${YELLOW}📝 Next steps:${NC}"
-echo "1. Edit the .env file with your configuration:"
+echo "1. Change to the installation directory:"
+echo -e "   ${GREEN}cd ~/clockit-agent${NC}"
+echo ""
+echo "2. Edit the .env file with your configuration:"
 echo "   nano .env"
 echo ""
-echo "2. Start the services:"
+echo "3. Start the services:"
 echo "   docker-compose up -d"
 echo ""
-echo "3. Access the UI at: http://localhost:3000"
+echo "4. Access the UI at: http://localhost:3000"
 echo ""
 echo -e "${BLUE}ℹ️  To update Clockit Agent in the future, simply run:${NC}"
 echo "   ./update.sh"

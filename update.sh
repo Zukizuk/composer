@@ -16,23 +16,30 @@ NC='\033[0m' # No Color
 
 # Check if running from the correct directory
 INSTALL_DIR="$HOME/clockit-agent"
-if [ ! -f "$INSTALL_DIR/docker-compose.yml" ]; then
-    echo -e "${RED}❌ Cannot find docker-compose.yml in $INSTALL_DIR${NC}"
-    echo -e "Are you running this update script from the correct location?"
-    echo -e "If you installed to a custom location, please run this script from that directory."
+CURRENT_DIR="$(pwd)"
+
+if [ "$CURRENT_DIR" != "$INSTALL_DIR" ]; then
+    echo -e "${YELLOW}⚠️  You are not in the installation directory.${NC}"
     
-    # Ask if they want to go to the default directory
-    read -p "Do you want to go to $INSTALL_DIR and continue? (y/n): " choice
-    case "$choice" in
-        y|Y)
-            echo -e "${YELLOW}📂 Changing to $INSTALL_DIR${NC}"
-            cd "$INSTALL_DIR" || { echo -e "${RED}❌ Failed to change directory.${NC}"; exit 1; }
-            ;;
-        *)
-            echo -e "${RED}❌ Update cancelled.${NC}"
-            exit 1
-            ;;
-    esac
+    if [ ! -f "docker-compose.yml" ] || [ ! -f ".env" ]; then
+        echo -e "${RED}❌ Required files not found in current directory.${NC}"
+        echo -e "This script should be run from the clockit-agent installation directory."
+        
+        # Ask if they want to go to the default directory
+        read -p "Do you want to go to $INSTALL_DIR and continue? (y/n): " choice
+        case "$choice" in
+            y|Y)
+                echo -e "${YELLOW}📂 Changing to $INSTALL_DIR${NC}"
+                cd "$INSTALL_DIR" || { echo -e "${RED}❌ Failed to change directory.${NC}"; exit 1; }
+                ;;
+            *)
+                echo -e "${RED}❌ Update cancelled.${NC}"
+                exit 1
+                ;;
+        esac
+    else
+        echo -e "${YELLOW}ℹ️  Continuing with update in current directory: $CURRENT_DIR${NC}"
+    fi
 fi
 
 # Check if Docker is running

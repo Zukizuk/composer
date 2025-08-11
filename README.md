@@ -12,6 +12,11 @@ curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/install.sh | 
 
 > **Note for Windows users**: Run this command in Git Bash, WSL, or another bash-compatible shell.
 
+After installation, change to the installation directory:
+```bash
+cd ~/clockit-agent
+```
+
 This will:
 - Download the necessary files to `~/clockit-agent/`
 - Set up the environment
