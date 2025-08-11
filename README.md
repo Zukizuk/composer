@@ -10,6 +10,8 @@ A simple Docker Compose setup to run Clockit Agent with its web UI.
 curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/install.sh | bash
 ```
 
+> **Note for Windows users**: Run this command in Git Bash, WSL, or another bash-compatible shell.
+
 This will:
 - Download the necessary files to `~/clockit-agent/`
 - Set up the environment
@@ -50,6 +52,21 @@ This will:
 - Docker
 - Docker Compose
 
+## Platform Support
+
+### Linux/macOS
+The scripts work natively on Linux and macOS systems.
+
+### Windows
+For Windows users:
+1. Install Docker Desktop for Windows
+2. Use one of the following options to run the installation script:
+   - **Option 1**: Install [Git Bash](https://gitforwindows.org/) and run the script through it
+   - **Option 2**: Use [WSL (Windows Subsystem for Linux)](https://docs.microsoft.com/en-us/windows/wsl/install)
+   - **Option 3**: Use [Cygwin](https://www.cygwin.com/)
+
+The scripts must be run in a bash-compatible shell.
+
 ## Usage
 
 ### Start services
@@ -69,6 +86,10 @@ docker-compose logs -f
 
 ### Update to latest version
 ```bash
+# If you installed using our script, just run:
+./update.sh
+
+# Or manually:
 docker-compose pull
 docker-compose up -d
 ```

@@ -11,6 +11,7 @@ echo "🚀 Installing Clockit Agent..."
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Check if Docker is installed
@@ -46,6 +47,12 @@ if [ ! -f .env ]; then
     echo -e "${YELLOW}⚠️  Please edit the .env file with your configuration before running.${NC}"
 fi
 
+# Download update script
+echo -e "${YELLOW}⬇️  Downloading update script...${NC}"
+curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/update.sh -o update.sh
+chmod +x update.sh
+echo -e "${GREEN}✅ Update script downloaded and made executable${NC}"
+
 echo -e "${GREEN}✅ Files downloaded successfully!${NC}"
 echo ""
 echo -e "${YELLOW}📝 Next steps:${NC}"
@@ -56,5 +63,8 @@ echo "2. Start the services:"
 echo "   docker-compose up -d"
 echo ""
 echo "3. Access the UI at: http://localhost:3000"
+echo ""
+echo -e "${BLUE}ℹ️  To update Clockit Agent in the future, simply run:${NC}"
+echo "   ./update.sh"
 echo ""
 echo -e "${GREEN}🎉 Installation complete!${NC}"
