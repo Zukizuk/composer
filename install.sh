@@ -30,7 +30,10 @@ fi
 INSTALL_DIR="$HOME/clockit-agent"
 echo -e "${YELLOW}📁 Creating installation directory: $INSTALL_DIR${NC}"
 mkdir -p "$INSTALL_DIR"
-cd "$INSTALL_DIR"
+
+# Change to the installation directory
+echo -e "${YELLOW}📂 Changing to installation directory: $INSTALL_DIR${NC}"
+cd "$INSTALL_DIR" || { echo -e "${RED}❌ Failed to change to installation directory.${NC}"; exit 1; }
 
 # Download docker-compose.yml
 echo -e "${YELLOW}⬇️  Downloading docker-compose.yml...${NC}"
