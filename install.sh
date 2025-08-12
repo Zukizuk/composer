@@ -52,6 +52,11 @@ curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/update.sh -o 
 chmod +x "$INSTALL_DIR/update.sh"
 echo -e "${GREEN}✅ Update script downloaded and made executable${NC}"
 
+# Download README for local reference
+echo -e "${YELLOW}⬇️  Downloading README for local reference...${NC}"
+curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/README.md -o "$INSTALL_DIR/README.md"
+echo -e "${GREEN}✅ Documentation downloaded${NC}"
+
 echo -e "${GREEN}✅ Files downloaded successfully!${NC}"
 echo ""
 echo -e "${YELLOW}📝 Next steps:${NC}"
@@ -66,7 +71,7 @@ echo "   docker-compose up -d"
 echo ""
 echo "4. Access the UI at: http://localhost:3000"
 echo ""
-echo -e "${BLUE}ℹ️  To update Clockit Agent in the future, simply run:${NC}"
-echo "   ./update.sh"
+echo -e "${BLUE}ℹ️  For detailed instructions and updates, check the README.md in your installation directory${NC}"
+echo -e "${BLUE}ℹ️  To update Clockit Agent in the future, simply run: ./update.sh${NC}"
 echo ""
 echo -e "${GREEN}🎉 Installation complete!${NC}"

@@ -47,6 +47,65 @@ This will:
    - UI: http://localhost:3000
    - API: http://localhost:2024
 
+## After Installation Guide
+
+Once you've installed Clockit Agent (either via the one-line installer or manually), follow these steps:
+
+### 1. Navigate to Installation Directory
+```bash
+cd ~/clockit-agent
+```
+
+### 2. Configure Your Environment
+Edit the `.env` file with your configuration:
+```bash
+nano .env
+```
+Fill in your API keys and other required settings.
+
+### 3. Start the Services
+```bash
+docker-compose up -d
+```
+
+### 4. Access the Application
+- **Web UI**: http://localhost:3000
+- **API**: http://localhost:2024
+
+### 5. Check Status
+```bash
+docker-compose ps
+```
+
+### 6. View Logs (if needed)
+```bash
+docker-compose logs -f
+```
+
+## Updating Clockit Agent
+
+### Automatic Update (Recommended)
+If you used our installer, you have an update script:
+```bash
+cd ~/clockit-agent
+./update.sh
+```
+
+The update script will:
+- Back up your configuration
+- Download latest files
+- Pull new Docker images
+- Restart services
+- Verify everything is running
+
+### Manual Update
+```bash
+cd ~/clockit-agent
+docker-compose pull
+docker-compose down
+docker-compose up -d
+```
+
 ## Services
 
 - **agent-chat-ui**: Web interface for interacting with the agent
@@ -91,13 +150,9 @@ docker-compose logs -f
 
 ### Update to latest version
 ```bash
-# If you installed using our script, just run:
 ./update.sh
-
-# Or manually:
-docker-compose pull
-docker-compose up -d
 ```
+(See the "Updating Clockit Agent" section above for detailed instructions)
 
 ## Configuration
 
