@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   agent-chat-ui:
     image: zukizuk/agent-chat-ui:latest
