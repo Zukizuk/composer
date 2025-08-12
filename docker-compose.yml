@@ -5,7 +5,7 @@ services:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:2024
-      - NEXT_PUBLIC_ASSISTANT_ID=clockit_agent
+      - NEXT_PUBLIC_ASSISTANT_ID=agent
     restart: unless-stopped
     container_name: agent-chat-ui
     depends_on:
