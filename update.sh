@@ -55,7 +55,18 @@ if [ -f .env ]; then
     echo -e "${GREEN}✅ Configuration backed up to .env.backup${NC}"
 fi
 
-# Pull the latest docker-compose.yml
+# Download the latest .env.example as the new .env
+echo -e "${BLUE}⬇️  Downloading latest .env.example...${NC}"
+curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/.env.example -o .env
+
+# Check if download was successful
+if [ ! -f .env ]; then
+    echo -e "${RED}❌ Failed to download the latest .env.example${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✅ Updated .env with latest template${NC}"
+echo -e "${YELLOW}⚠️  Please review and update .env with your specific configuration values.${NC} Check .env.backup for previous settings."
 echo -e "${BLUE}⬇️  Downloading latest docker-compose.yml...${NC}"
 curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/docker-compose.yml -o docker-compose.yml.new
 
