@@ -53,6 +53,8 @@ echo -e "${YELLOW}💾 Backing up configuration...${NC}"
 if [ -f .env ]; then
     cp .env .env.backup
     echo -e "${GREEN}✅ Configuration backed up to .env.backup${NC}"
+    rm .env
+    echo -e "${YELLOW}🗑️  Removed old .env file${NC}"
 fi
 
 # Download the latest .env.example as the new .env
