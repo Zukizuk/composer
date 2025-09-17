@@ -48,39 +48,6 @@ if ! docker info &> /dev/null; then
     exit 1
 fi
 
-# Update the update script itself first
-echo -e "${BLUE}🔄 Checking for script updates...${NC}"
-SCRIPT_URL="https://raw.githubusercontent.com/Zukizuk/composer/main/update.sh"
-TEMP_SCRIPT="/tmp/update_new.sh"
-
-# Download the latest version of this script
-curl -fsSL "$SCRIPT_URL" -o "$TEMP_SCRIPT"
-
-if [ -f "$TEMP_SCRIPT" ]; then
-    # Compare current script with the new one
-    if ! diff -q "$0" "$TEMP_SCRIPT" &>/dev/null; then
-        echo -e "${YELLOW}📝 Script update available. Updating...${NC}"
-        
-        # Make the new script executable
-        chmod +x "$TEMP_SCRIPT"
-        
-        # Replace the current script with the new one
-        cp "$TEMP_SCRIPT" "$0"
-        rm "$TEMP_SCRIPT"
-        
-        echo -e "${GREEN}✅ Script updated! Restarting with new version...${NC}"
-        echo ""
-        
-        # Re-execute the updated script
-        exec "$0" "$@"
-    else
-        echo -e "${GREEN}✓ Script is already up to date${NC}"
-        rm "$TEMP_SCRIPT"
-    fi
-else
-    echo -e "${YELLOW}⚠️  Could not check for script updates, continuing...${NC}"
-fi
-
 # Backup the .env file
 echo -e "${YELLOW}💾 Backing up configuration...${NC}"
 if [ -f .env ]; then

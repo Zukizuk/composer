@@ -84,21 +84,30 @@ docker-compose logs -f
 
 ## Updating Clockit Agent
 
-### Automatic Update (Recommended)
+### One-line Update (Recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Zukizuk/composer/main/update.sh | bash
+```
+
+This will automatically:
+- Download and run the latest update script
+- Back up your current configuration
+- Download latest files
+- Pull new Docker images
+- Restart services
+- Verify everything is running
+
+### Alternative Update Methods
+
+#### Using Local Update Script
 If you used our installer, you have an update script:
 ```bash
 cd ~/clockit-agent
 ./update.sh
 ```
 
-The update script will:
-- Back up your configuration
-- Download latest files
-- Pull new Docker images
-- Restart services
-- Verify everything is running
-
-### Manual Update
+#### Manual Update
 ```bash
 cd ~/clockit-agent
 docker-compose pull
