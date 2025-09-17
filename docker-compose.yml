@@ -1,24 +1,12 @@
 services:
   agent-chat-ui:
-    image: zukizuk/agent-chat-ui:latest
+    image: zukizuk/clock-it
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:2024
-      - NEXT_PUBLIC_ASSISTANT_ID=agent
-    restart: unless-stopped
-    container_name: agent-chat-ui
-    depends_on:
-      - clockit-agent
-
-  clockit-agent:
-    image: zukizuk/clockit-agent:latest
-    ports:
-      - "2024:2024"
     env_file:
       - .env
     restart: unless-stopped
-    container_name: clockit-agent
+    container_name: agent-chat-ui
 
 networks:
   default:
